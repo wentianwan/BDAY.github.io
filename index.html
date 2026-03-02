@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>生日倒计时 | 202405行知</title>
-//2026年3月3日熬夜赶出来的，你看什么看？
+<!--2026年3月3日熬夜赶出来的，这么闲，是来帮我写吗？去玩你的游戏去。-->
     <style> *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Microsoft YaHei',sans-serif;background:#f8f9fa;color:#333;min-height:100vh;transition:all 0.3s;padding:10px}
         .dark-mode{background:#121212;color:#e0e0e0}
@@ -82,7 +82,7 @@
 <div class="container">
     <div class="header">
         <h1>生日倒计时系统</h1>
-//都说了，数据不在本地，你看啥？
+<!--都说了，数据不在本地，你看啥？-->
         <div id="currentTime"></div>
         <button class="theme-switch" id="themeSwitch">🌙 夜间模式</button>
     </div>
@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        //你这都看不懂，学啥计算机
+        <!--你这都看不懂，学啥计算机-->
         <div class="card">
             <h2>🔍 信息验证</h2>
             <div class="verification-box">
@@ -139,7 +139,7 @@
         </div>
     </div>
 </div>
-
+<!--都看到这里了，只要你不是2025级计算机班精神黑客就行，其他都好说。人家瞪一眼鼠标键盘不动就说把全世界系统都黑了，哈哈哈-->
 <script>
     (function() {
         let students = [];
@@ -200,7 +200,6 @@
                 const signs = ['摩羯', '水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手'];
                 return signs[signIndex];
             } else {
-                // 日期小于分割日，取上一个星座 (索引monthIdx-1)，如果monthIdx=0则取11(摩羯)
                 const signIndex = (monthIdx - 1 + 12) % 12;
                 const signs = ['摩羯', '水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手'];
                 return signs[signIndex];
@@ -296,7 +295,7 @@
             });
         }
 
-        // 加载远程数据
+        
         async function loadData() {
             try {
                 const res = await fetch('https://api.wentianplay.com/api/xz202405BDAY.json');
