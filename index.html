@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>生日倒计时 · 202405行知</title>
+    <title>生日倒计时 2024级5班行知</title>
     <!--2026年3月3日熬夜赶出来的，这么闲，是来帮我写吗？去玩你的游戏去。-->
     <style> *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Microsoft YaHei',sans-serif;background:#f8f9fa;color:#333;min-height:100vh;transition:all 0.3s;padding:10px}
@@ -99,7 +99,7 @@
 
     <div class="main-content">
         <div class="card">
-            <h2>👥 学生列表 · 生肖祝福</h2>
+            <h2>👥 学生列表</h2>
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="输入姓名搜索...">
             </div>
@@ -324,7 +324,7 @@
             }
 
             if (input !== selectedStudent.idNumber.slice(-4)) {
-                err.textContent = '身份证后四位错误';
+                err.textContent = '后四位错误';
                 err.classList.add('active');
                 return;
             }
