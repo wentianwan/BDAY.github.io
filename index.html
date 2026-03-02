@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>生日倒计时 · 祝福版</title>
+    <title>生日倒计时 · 202405行知</title>
     <!--2026年3月3日熬夜赶出来的，这么闲，是来帮我写吗？去玩你的游戏去。-->
     <style> *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Microsoft YaHei',sans-serif;background:#f8f9fa;color:#333;min-height:100vh;transition:all 0.3s;padding:10px}
@@ -84,7 +84,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🎂 生日倒计时 · 祝福版</h1>
+        <h1>🎂 生日倒计时 · 202405</h1>
 <!--都说了，数据不在本地，你看啥？-->
         <div id="currentTime"></div>
         <button class="theme-switch" id="themeSwitch">🌙 夜间模式</button>
@@ -92,12 +92,10 @@
 
     <div class="countdown-container">
         <div class="countdown-card">
-            <h2>⏳ 最近生日 · 倒计时</h2>
+            <h2>⏳ 最近生日の倒计时</h2>
             <div id="topCountdowns"></div>
         </div>
     </div>
-
-    <div class="current-time" id="currentCountdown">正在加载时间...</div>
 
     <div class="main-content">
         <div class="card">
@@ -190,12 +188,12 @@
             return zodiacs[year % 12] || '?';
         }
 
-        // ---------- 根据生肖生成祝福语 ----------
+       
         function getBlessingByZodiac(zodiac) {
             const map = {
-                '鼠': '机敏灵巧，岁月丰盈',
-                '牛': '勤勉踏实，厚德载物',
-                '虎': '虎虎生威，前程似锦',
+                '鼠': '生日快乐，同志！',
+                '牛': '生日快乐，同志！',
+                '虎': '生日快乐，同志！',
                 '兔': '温柔聪慧，步步登高',
                 '龙': '神龙昂首，万事顺遂',
                 '蛇': '睿智从容，福泽绵长',
@@ -209,7 +207,7 @@
             return map[zodiac] || '生日快乐，万事如意';
         }
 
-        // 星座相关函数已完全删除，所有调用都移除
+     
 
         function renderStudents(filter = '') {
             const container = document.getElementById('studentsList');
