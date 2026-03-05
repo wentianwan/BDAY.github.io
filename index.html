@@ -146,8 +146,43 @@
         let students = [];
         let selectedStudent = null;
         let isDarkMode = false;
+        let retryCount = 0;
+        const MAX_RETRIES = 13;
+        let retryTimer = null;
 
+        // 修改loadData函数，添加重试逻辑
+        async function loadData() {
+            try {
+                const res = await fetch('链接1');
+                if (!res.ok) throw new Error('Network response was not ok');
+                students = await res.json();
+                retryCount = 0; // 重置重试计数
+                renderStudents();
+                updateAllCountdowns();
+                setInterval(updateAllCountdowns, 1000);
+            } catch (e) {
+                console.error('加载失败:', e);
+                retryCount++;
 
+                if (retryCount >= MAX_RETRIES) {
+                    // 连续13次失败，跳转链接2
+                    window.location.href = '链接2';
+                    return;
+                }
+
+                // 1秒后重试
+                retryTimer = setTimeout(loadData, 1000);
+            }
+        }
+
+        // 在页面卸载时清理定时器
+        window.addEventListener('beforeunload', function() {
+            if (retryTimer) {
+                clearTimeout(retryTimer);
+            }
+        });
+
+        // 其他原有函数保持不变...
         function updateTime() {
             const now = new Date();
             const dateStr = now.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'long' });
@@ -159,12 +194,10 @@
             return id ? `${id.substring(0,6)}********${id.substring(14)}` : '-';
         }
 
-
         function getBirthday(id) {
             if (!id || id.length < 14) return '2000-01-01';
             return `${id.substring(6,10)}-${id.substring(10,12)}-${id.substring(12,14)}`;
         }
-
 
         function getCountdown(birthStr) {
             const now = new Date();
@@ -182,13 +215,11 @@
             return { days, hours, minutes, seconds, totalMs: diffMs };
         }
 
-
         function getZodiac(year) {
             const zodiacs = ['猴','鸡','狗','猪','鼠','牛','虎','兔','龙','蛇','马','羊'];
             return zodiacs[year % 12] || '?';
         }
 
-       
         function getBlessingByZodiac(zodiac) {
             const map = {
                 '鼠': '生日快乐，同志！',
@@ -206,8 +237,6 @@
             };
             return map[zodiac] || '生日快乐，万事如意';
         }
-
-     
 
         function renderStudents(filter = '') {
             const container = document.getElementById('studentsList');
@@ -292,24 +321,6 @@
             });
         }
 
-
-      async function loadData() {
-            try {
-                const res = await fetch('https://api.wentianplay.com/api/xz202405BDAY.json');
-                students = await res.json();
-                renderStudents();
-                updateAllCountdowns();
-                setInterval(updateAllCountdowns, 1000);
-            } catch (e) {
-                // API加载失败，1秒后静默重试
-                setTimeout(loadData, 1000);
-            }
-        }
-
-                document.getElementById('studentsList').innerHTML = '<div style="text-align:center;padding:20px;color:#e74c3c">数据加载失败，请检查网络</div>';
-            }
-        }
-
         function verify() {
             const err = document.getElementById('errorMsg');
             err.classList.remove('active');
@@ -346,6 +357,7 @@
             document.getElementById('themeSwitch').textContent = isDarkMode ? '☀️ 日间模式' : '🌙 夜间模式';
             localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         }
+
         document.addEventListener('DOMContentLoaded', () => {
             isDarkMode = localStorage.getItem('theme') === 'dark';
             document.body.classList.toggle('dark-mode', isDarkMode);
@@ -353,7 +365,7 @@
 
             updateTime();
             setInterval(updateTime, 1000);
-            loadData();
+            loadData(); // 启动数据加载
             document.getElementById('searchInput').oninput = (e) => renderStudents(e.target.value);
             document.getElementById('verifyBtn').onclick = verify;
             document.getElementById('idLastFour').onkeypress = (e) => e.key === 'Enter' && verify();
