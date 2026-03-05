@@ -293,7 +293,7 @@
         }
 
 
-        async function loadData() {
+      async function loadData() {
             try {
                 const res = await fetch('https://api.wentianplay.com/api/xz202405BDAY.json');
                 students = await res.json();
@@ -301,7 +301,11 @@
                 updateAllCountdowns();
                 setInterval(updateAllCountdowns, 1000);
             } catch (e) {
-                console.error('加载失败:', e);
+                // API加载失败，1秒后静默重试
+                setTimeout(loadData, 1000);
+            }
+        }
+
                 document.getElementById('studentsList').innerHTML = '<div style="text-align:center;padding:20px;color:#e74c3c">数据加载失败，请检查网络</div>';
             }
         }
